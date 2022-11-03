@@ -1,0 +1,22 @@
+{
+  // https://code.visualstudio.com/docs/remote/containers#_system-requirements
+  "name": "sample_api",
+  "dockerFile": "Dockerfile",
+  "runArgs": [
+    // Sync git config
+    "-v",
+    "${env:HOME}${env:USERPROFILE}/.gitconfig:/root/.gitconfig",
+    "--env-file=./.devcontainer/devcontainer.env"
+  ],
+  "settings": {
+    "python.pythonPath": "/usr/local/bin/python",
+    "python.analysis.extraPaths": [
+      "/usr/local/lib/python3.9/site-packages/"
+    ]
+  },
+  "postCreateCommand": "cd backend && pip install -r requirements.txt",
+  "extensions": [
+    "editorconfig.editorconfig",
+    "ms-python.python"
+  ]
+}

@@ -1,0 +1,28 @@
+version: "3"
+services:
+  sample_api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: always
+    depends_on:
+      - sample_mysql
+    volumes:
+      - ./backend:/backend
+    env_file:
+      - .env/local/.fast_api
+      - .env/local/.mysql
+    # command: gunicorn api.main:app --workers 1 --reload --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:8000
+    command: uvicorn api.main:app --reload --port=8000 --host=0.0.0.0
+    ports:
+      - "8000:8000"
+
+  sample_mysql:
+    platform: linux/amd64
+    image: mysql:5.7
+    env_file:
+      - .env/local/.mysql
+    volumes:
+      - ./backend/db/my.cnf:/etc/mysql/conf.d/my.cnf
+    ports:
+      - "3306:3306"

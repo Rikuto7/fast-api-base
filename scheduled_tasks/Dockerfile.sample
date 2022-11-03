@@ -1,0 +1,23 @@
+FROM python:3.9-slim
+
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONBUFFERED 1
+ENV PYTHONPATH /
+
+WORKDIR /sample
+
+RUN apt update \
+    && apt-get -y install gcc libmariadb-dev \
+    && apt install -y default-mysql-client \
+    && apt-get install -y default-libmysqlclient-dev \
+    && apt install --no-install-recommends -y tzdata \
+    && apt clean
+
+COPY /sample/requirements.txt /requirements.txt
+RUN pip install --upgrade pip
+RUN pip install -r /requirements.txt --no-cache-dir
+
+COPY ./sample /sample
+COPY ./database.py /sample
+
+CMD [ "python3", "main.py" ]

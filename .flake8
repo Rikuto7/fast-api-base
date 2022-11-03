@@ -1,0 +1,10 @@
+[flake8]
+ignore=E402, A003
+exclude=.git,*migrations*,backend/db/migrations/versions/*
+per-file-ignores=__init__.py:F401
+max-complexity=10
+max-line-length=120
+
+classmethod-decorators =
+    classmethod
+    validator
