@@ -34,7 +34,7 @@ async def unicorn_exception_handler(request: Request, exc: HTTPException):
     )
 
 
-app.include_router(routers.router, prefix='/api-v1/sample')
+app.include_router(routers.router, prefix='/api-v1')
 
 
 @app.get('/')

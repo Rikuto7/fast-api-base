@@ -1,2 +1,2 @@
 from backend.api.database import Base
-from .store import SampleModel
+from .person import Parent, Child
