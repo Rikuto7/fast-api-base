@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
-from backend.api.routers.sample_router import sample
+from backend.api.routers.endpoints.businesses import person
 
 router = APIRouter()
 
-router.include_router(sample.router, prefix='', tags=['demo'])
+router.include_router(person.router, prefix='', tags=['demo'])
